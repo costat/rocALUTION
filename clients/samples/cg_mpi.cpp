@@ -56,6 +56,9 @@ int main(int argc, char* argv[])
         return -1;
     }
 
+    int ompThreads = 1;
+    if (argc > 2) ompThreads = atoi(argv[2]);
+
     // Disable OpenMP thread affinity
     set_omp_affinity_rocalution(false);
 
@@ -63,7 +66,7 @@ int main(int argc, char* argv[])
     init_rocalution(rank, 2);
 
     // Disable OpenMP
-    set_omp_threads_rocalution(1);
+    set_omp_threads_rocalution(ompThreads);
 
     // Print platform
     info_rocalution();
